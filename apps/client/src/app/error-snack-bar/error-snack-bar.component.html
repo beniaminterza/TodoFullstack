@@ -1,0 +1,13 @@
+<div class="error">
+  <span matSnackBarLabel> Error: {{ data.errorMessage }} </span>
+  <span matSnackBarActions>
+    <button
+      mat-raised-button
+      matSnackBarAction
+      color="warn"
+      (click)="ref.dismissWithAction()"
+    >
+      Close
+    </button>
+  </span>
+</div>

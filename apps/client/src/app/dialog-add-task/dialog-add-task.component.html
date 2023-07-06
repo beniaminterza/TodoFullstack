@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Add Task</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="isEditMode() ? editTask() : addTask()">
+    <mat-form-field class="full-width-field">
+      <mat-label>Task name</mat-label>
+      <input matInput required formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width-field">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <button type="submit" [disabled]="!formIsValid" style="display: none">
+        hidden submit
+      </button>
+    </mat-form-field>
+  </form>
+  <mat-progress-bar
+    *ngIf="isLoading; else spaceHolder"
+    mode="indeterminate"
+    class="progress-bar"
+  ></mat-progress-bar>
+  <ng-template #spaceHolder><span class="spaceholder"></span></ng-template>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button
+    color="primary"
+    mat-button
+    mat-flat-button
+    [disabled]="!formIsValid"
+    (click)="addTask()"
+    *ngIf="!isEditMode(); else edit"
+  >
+    Add
+  </button>
+  <ng-template #edit>
+    <button
+      color="primary"
+      mat-button
+      mat-flat-button
+      [disabled]="!formIsValid"
+      (click)="editTask()"
+    >
+      Edit
+    </button>
+  </ng-template>
+</div>

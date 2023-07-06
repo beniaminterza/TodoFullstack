@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  client:
+    container_name: todo_client
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - '80:80'
+  server:
+    container_name: todo_server
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - '3333:3333'
+    command: node dist/apps/server/main.js --host=0.0.0.0
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '27017:27017'

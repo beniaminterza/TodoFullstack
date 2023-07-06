@@ -1,0 +1,12 @@
+<mat-card class="tasks-container">
+  <mat-card-content>
+    <app-task-item *ngFor="let task of tasks" [task]="task"></app-task-item>
+    <p *ngIf="(!isLoading && tasks.length < 1) || !tasks">No tasks found :(</p>
+  </mat-card-content>
+  <mat-card-footer *ngIf="isLoading">
+    <mat-progress-bar
+      mode="indeterminate"
+      class="progess-bar"
+    ></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

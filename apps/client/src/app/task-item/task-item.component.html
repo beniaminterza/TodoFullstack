@@ -1,0 +1,55 @@
+<mat-card class="task-card">
+  <mat-card-content class="task-card-content">
+    <div class="toggle">
+      <mat-checkbox
+        [checked]="task.isDone"
+        (click)="toggleChange($event)"
+        class="example-margin"
+        color="primary"
+      ></mat-checkbox>
+      <div
+        (click)="toggleChange(); $event.preventDefault()"
+        class="text"
+        [ngClass]="{ checked: task.isDone }"
+      >
+        <mat-card-title>{{ task.name }}</mat-card-title>
+      </div>
+    </div>
+    <div class="left">
+      <p *ngIf="task.endDate" [ngClass]="{ late: isDateExpired() }">
+        {{ task.endDate | momentPipe }}
+      </p>
+      <a routerLink="/detail/{{ this.task._id }}">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Example icon button with a home icon"
+        >
+          <mat-icon>dashboard</mat-icon>
+        </button>
+      </a>
+      <button
+        mat-icon-button
+        aria-label="Example icon button with a home icon"
+        (click)="openEditDialog()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Example icon button with a home icon"
+        (click)="openDeleteDialog()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+
+  <mat-card-footer *ngIf="isLoading">
+    <mat-progress-bar
+      mode="indeterminate"
+      class="progess-bar"
+    ></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

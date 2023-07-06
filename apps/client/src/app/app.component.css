@@ -1,0 +1,28 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem;
+}
+
+.wave {
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+}
+
+.home {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}

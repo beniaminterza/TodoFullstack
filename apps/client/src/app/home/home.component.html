@@ -1,0 +1,8 @@
+<h1>Todo List</h1>
+<div class="button-container">
+  <button mat-raised-button color="primary" (click)="openDialog()" class="add">
+    Add Task
+  </button>
+  <app-select-filter #filterComponent></app-select-filter>
+</div>
+<app-task-list [filter]="filterComponent.selected"> </app-task-list>

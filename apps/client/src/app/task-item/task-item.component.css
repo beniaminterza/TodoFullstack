@@ -1,0 +1,48 @@
+.task-card {
+  margin: 0.5rem;
+  overflow: hidden;
+}
+
+.task-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-card-content div {
+  display: flex;
+  align-items: center;
+}
+
+.task-card-content div p {
+  margin: 0;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.task-card .text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.task-card .left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.late {
+  color: rgb(236, 97, 23);
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+.progess-bar {
+  margin-top: 0.6rem;
+}

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Settings</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form" (ngSubmit)="saveSettings()">
+    <mat-form-field>
+      <mat-label>Sort tasks by</mat-label>
+      <mat-select formControlName="sortBy">
+        <mat-option value="createdAt">Created at</mat-option>
+        <mat-option value="updatedAt">Updated at</mat-option>
+        <mat-option value="name">Name</mat-option>
+        <mat-option value="_id">Id</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Order</mat-label>
+      <mat-select formControlName="order">
+        <mat-option value="1">Ascending</mat-option>
+        <mat-option value="-1">Descending</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    color="primary"
+    mat-button
+    mat-flat-button
+    (click)="saveSettings()"
+    [disabled]="form.pristine"
+  >
+    Save
+  </button>
+</div>

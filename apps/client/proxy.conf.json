@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "http://server:3333",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

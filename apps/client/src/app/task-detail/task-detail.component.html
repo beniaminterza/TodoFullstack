@@ -1,0 +1,29 @@
+<h1>Details</h1>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading; else table">
+</mat-progress-bar>
+<ng-template #table>
+  <table
+    mat-table
+    [dataSource]="data"
+    class="mat-elevation-z8"
+    *ngIf="!isError"
+  >
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="attribute">
+      <th mat-header-cell *matHeaderCellDef>Attribute</th>
+      <td mat-cell *matCellDef="let element">{{ element.attribute }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef>Value</th>
+      <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</ng-template>

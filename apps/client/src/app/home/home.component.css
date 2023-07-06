@@ -1,0 +1,31 @@
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.button-container button:nth-child(0) {
+  display: flex;
+  justify-content: space-between;
+}
+
+button .add {
+  padding: 0;
+}
+
+.settings {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 1.75rem;
+}
+
+@media only screen and (max-width: 1360px) {
+  h1 {
+    margin-bottom: 2.2rem;
+  }
+}
