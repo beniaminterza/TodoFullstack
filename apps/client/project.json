@@ -7,12 +7,6 @@
   "tags": [],
   "targets": {
     "build": {
-      "fileReplacements": [
-        {
-          "replace": "../environments/environment.development",
-          "with": "../environments/environment"
-        }
-      ],
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -31,6 +25,12 @@
 
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/client/src/environments/environment.development.ts",
+              "with": "apps/client/src/environments/environment.ts"
+            }
+          ],
           "budgets": [
             {
               "type": "initial",
