@@ -117,69 +117,69 @@ describe('PUT /api/tasks', () => {
       'Request failed with status code 400'
     );
   });
+});
 
-  describe('GET /api/tasks', () => {
-    it('should return an array of tasks', async () => {
-      const res = await axios.get(`/api/tasks`);
-      console.log(res.data);
+describe('GET /api/tasks', () => {
+  it('should return an array of tasks', async () => {
+    const res = await axios.get(`/api/tasks`);
+    console.log(res.data);
 
-      expect(res.status).toBe(200);
-      expect(res.data).toBeInstanceOf(Array);
-    });
-
-    it('should return an array of tasks with isDone=true', async () => {
-      const res = await axios.get(`/api/tasks?filter=done`);
-
-      expect(res.status).toBe(200);
-      res.data.map((e) => expect(e).toMatchObject({ isDone: true }));
-    });
-
-    it('should return an array of tasks with isDone=false', async () => {
-      const res = await axios.get(`/api/tasks?filter=toDo`);
-
-      expect(res.status).toBe(200);
-      res.data.map((e) => expect(e).toMatchObject({ isDone: false }));
-    });
-    it('should return an array of tasks with an endDate', async () => {
-      const res = await axios.get(`/api/tasks?filter=dateLimit`);
-
-      expect(res.status).toBe(200);
-      res.data.map((e) => expect(e).toHaveProperty('endDate'));
-    });
+    expect(res.status).toBe(200);
+    expect(res.data).toBeInstanceOf(Array);
   });
 
-  describe('DELETE /api/tasks/id', () => {
-    it('should return object with comfirmation of deletion 1', async () => {
-      const res1 = await axios.get(`/api/tasks`);
-      const element = res1.data?.find((e) => {
-        return e?.name === 'Clean Laptop';
-      });
-      const id = element._id;
-      const res2 = await axios.delete(`/api/tasks/${id}`);
-      expect(res2.data).toMatchObject({ deletedCount: 1 });
-    });
+  it('should return an array of tasks with isDone=true', async () => {
+    const res = await axios.get(`/api/tasks?filter=done`);
 
-    it('should return object with comfirmation of deletion 2', async () => {
-      const res1 = await axios.get(`/api/tasks`);
-      const element = res1.data?.find((e) => {
-        return e?.name === 'Make breakfast';
-      });
-      const id = element._id;
-      const res2 = await axios.delete(`/api/tasks/${id}`);
-      expect(res2.data).toMatchObject({ deletedCount: 1 });
-    });
+    expect(res.status).toBe(200);
+    res.data.map((e) => expect(e).toMatchObject({ isDone: true }));
+  });
 
-    it('should return an error because id not existing 1', async () => {
-      const id = '282293929';
-      const res = await axios.delete(`/api/tasks/${id}`);
-      expect(res.data.response.statusCode).toEqual(404);
-    });
+  it('should return an array of tasks with isDone=false', async () => {
+    const res = await axios.get(`/api/tasks?filter=toDo`);
 
-    it('should return an error because id is not passed', async () => {
-      const res = axios.delete(`/api/tasks`);
-      await expect(res).rejects.toThrowError(
-        'Request failed with status code 404'
-      );
+    expect(res.status).toBe(200);
+    res.data.map((e) => expect(e).toMatchObject({ isDone: false }));
+  });
+  it('should return an array of tasks with an endDate', async () => {
+    const res = await axios.get(`/api/tasks?filter=dateLimit`);
+
+    expect(res.status).toBe(200);
+    res.data.map((e) => expect(e).toHaveProperty('endDate'));
+  });
+});
+
+describe('DELETE /api/tasks/id', () => {
+  it('should return object with comfirmation of deletion 1', async () => {
+    const res1 = await axios.get(`/api/tasks`);
+    const element = res1.data?.find((e) => {
+      return e?.name === 'Clean Laptop';
     });
+    const id = element._id;
+    const res2 = await axios.delete(`/api/tasks/${id}`);
+    expect(res2.data).toMatchObject({ deletedCount: 1 });
+  });
+
+  it('should return object with comfirmation of deletion 2', async () => {
+    const res1 = await axios.get(`/api/tasks`);
+    const element = res1.data?.find((e) => {
+      return e?.name === 'Make breakfast';
+    });
+    const id = element._id;
+    const res2 = await axios.delete(`/api/tasks/${id}`);
+    expect(res2.data).toMatchObject({ deletedCount: 1 });
+  });
+
+  it('should return an error because id not existing 1', async () => {
+    const id = '282293929';
+    const res = await axios.delete(`/api/tasks/${id}`);
+    expect(res.data.response.statusCode).toEqual(404);
+  });
+
+  it('should return an error because id is not passed', async () => {
+    const res = axios.delete(`/api/tasks`);
+    await expect(res).rejects.toThrowError(
+      'Request failed with status code 404'
+    );
   });
 });
