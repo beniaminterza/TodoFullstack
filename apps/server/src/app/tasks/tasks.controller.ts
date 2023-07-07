@@ -25,9 +25,9 @@ export class TasksController {
         transform: true,
         transformOptions: { enableImplicitConversion: true },
         forbidNonWhitelisted: true,
-      }),
+      })
     )
-    getTasksDto: GetTasksDto,
+    getTasksDto: GetTasksDto
   ) {
     return await this.taskServices.getTasks(getTasksDto);
   }
@@ -45,7 +45,7 @@ export class TasksController {
   @Put(':id')
   async updateTask(
     @Param('id') id: string,
-    @Body(new ValidationPipe()) updateTaskDto: UpdateTaskDto,
+    @Body(new ValidationPipe()) updateTaskDto: UpdateTaskDto
   ) {
     return await this.taskServices.editTask(id, updateTaskDto);
   }

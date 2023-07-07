@@ -11,8 +11,6 @@ export class TasksService {
   constructor(@InjectModel(Task.name) private taskModel: Model<Task>) {}
 
   async getTasks(data: GetTasksDto): Promise<any> {
-    console.log(data);
-
     let sortBy: string = data.sortBy ? data.sortBy : 'createdAt';
     let order: 1 | -1 = data.order === 1 ? 1 : -1;
     let sort = {};
@@ -38,9 +36,9 @@ export class TasksService {
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
       let result = await this.taskModel.find({ _id: id });
       if (result[0]) return result[0];
-      return NotFoundException;
+      return new NotFoundException();
     } else {
-      return NotFoundException;
+      return new NotFoundException();
     }
   }
 
@@ -49,31 +47,34 @@ export class TasksService {
       name: createTaskDto.name,
       endDate: createTaskDto.endDate,
     });
-    console.log('CREATED TASK: ');
-    console.log(result);
     return result;
   }
 
   async editTask(id: string, updateTaskDto: UpdateTaskDto): Promise<any> {
-    console.log(id);
-    const result = await this.taskModel.updateOne(
-      { _id: id },
-      {
-        $set: {
-          name: updateTaskDto.name,
-          endDate: updateTaskDto.endDate,
-          isDone: updateTaskDto.isDone,
-        },
-        $inc: { updatedCounter: 1 },
-      },
-    );
-    console.log(result);
-    return result;
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+      const result = await this.taskModel.updateOne(
+        { _id: id },
+        {
+          $set: {
+            name: updateTaskDto.name,
+            endDate: updateTaskDto.endDate,
+            isDone: updateTaskDto.isDone,
+          },
+          $inc: { updatedCounter: 1 },
+        }
+      );
+      return result;
+    } else {
+      return new NotFoundException();
+    }
   }
 
   async deleteTask(id: string): Promise<any> {
-    const result = await this.taskModel.deleteOne({ _id: id });
-    console.log(result);
-    return result;
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+      const result = await this.taskModel.deleteOne({ _id: id });
+      return result;
+    } else {
+      return new NotFoundException();
+    }
   }
 }
